@@ -8,23 +8,35 @@
 	<!-- <script src="//cdn.jsdelivr.net/npm/phaser@3.51.0/dist/phaser.js"></script> -->
 	<title>Document</title>
 	<script src="https://pixijs.download/release/pixi.js"></script>
-	<script src="game.js"></script>
+	<!-- <script src="game.js"></script> -->
 </head>
 <body>
 	<script>
+
 		let app = new PIXI.Application({ width: 640, height: 360 });
 		document.body.appendChild(app.view);
+		const HEIGHT = app.view.height;
+		const WIDTH = app.view.width;
+
+
+
 		let sprite = PIXI.Sprite.from('stick.png');
 
-		sprite.height = app.height / 5;
-		sprite.width = sprite.width / 5;
-		console.error(PIXI.height);
-		console.error(sprite);
+		sprite.height = HEIGHT / 5;
+		sprite.width = WIDTH / 10;
+		sprite.x = WIDTH / 2;
+		sprite.y = HEIGHT / 2;
+
 		app.stage.addChild(sprite);
 
-setInterval(() => {
-	sprite.x -= 4;
-}, 10);
+
+
+
+
+
+		setInterval(() => {
+			sprite.x -= 4;
+		}, 10);
 	  </script>
 </body>
 </html>
