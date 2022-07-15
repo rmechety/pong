@@ -16,6 +16,10 @@
 		document.body.appendChild(app.view);
 		let sprite = PIXI.Sprite.from('stick.png');
 		app.stage.addChild(sprite);
+
+setInterval(() => {
+	sprite.x -= 4;
+}, 10);
 	  </script>
 </body>
 </html>
