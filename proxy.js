@@ -1,23 +1,23 @@
 const GameObjectProxyWrapper = {
 	set(obj, prop, value) {
 		if (prop in obj) {
-			GO_HANDLER[prop](value);
+			GO_HANDLER[prop](obj, value);
 		} else {
 			throw new Error("Property " + prop + " does not exist.");
 		}
 	},
 };
-const MovingGameObjectProxyWrapper = {
+const MovingObjectProxyWrapper = {
 	set(obj, prop, value) {
 		if (prop in obj) {
-			MGO_HANDLER[prop](value);
+			MO_HANDLER[prop](obj, value);
 		} else {
 			throw new Error("Property " + prop + " does not exist.");
 		}
 	},
 };
 
-function Object_handler(type, options) {
+var Object_handler = function (type, options) {
 	if (type === "GameObject") {
 		return new Proxy(
 			new GameObject(
@@ -34,9 +34,9 @@ function Object_handler(type, options) {
 			GameObjectProxyWrapper,
 		);
 	}
-	if (type === "MovingGameObject") {
+	if (type === "MovingObject") {
 		return new Proxy(
-			new MovingGameObject(
+			new MovingObject(
 				options.spritename,
 				options.x,
 				options.y,
@@ -49,7 +49,7 @@ function Object_handler(type, options) {
 				options.vx,
 				options.vy,
 			),
-			MovingGameObjectProxyWrapper,
+			MovingObjectProxyWrapper,
 		);
 	}
-}
+};

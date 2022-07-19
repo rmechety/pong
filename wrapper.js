@@ -1,47 +1,47 @@
-function w_spritename(spritename) {
-	this.spritename = spritename;
-	this.sprite = PIXI.Sprite.from(this.spritename);
-	this.display();
+function w_spritename(obj, spritename) {
+	obj.spritename = spritename;
+	obj.sprite = PIXI.Sprite.from(obj.spritename);
+	obj.display();
 }
-function w_x(x) {
-	this.x = x;
-	this.sprite.x = this.x;
+function w_x(obj, x) {
+	obj.x = x;
+	obj.sprite.x = obj.x;
 }
-function w_y(y) {
-	this.y = y;
-	this.sprite.y = this.y;
+function w_y(obj, y) {
+	obj.y = y;
+	obj.sprite.y = obj.y;
 }
-function w_width(width) {
-	this.width = width;
-	this.sprite.width = this.width;
+function w_width(obj, width) {
+	obj.width = width;
+	obj.sprite.width = obj.width;
 }
-function w_height(height) {
-	this.height = height;
-	this.sprite.height = this.height;
-}
-
-function w_isvisible(isvisible) {
-	this.isvisible = isvisible;
-}
-function w_iscollidable(iscollidable) {
-	this.iscollidable = iscollidable;
-}
-function w_limit(limit) {
-	this.limit = limit;
+function w_height(obj, height) {
+	obj.height = height;
+	obj.sprite.height = obj.height;
 }
 
-function w_vx(vx) {
-	this.vx = vx;
+function w_isvisible(obj, isvisible) {
+	obj.isvisible = isvisible;
+}
+function w_iscollidable(obj, iscollidable) {
+	obj.iscollidable = iscollidable;
+}
+function w_limit(obj, limit) {
+	obj.limit = limit;
 }
 
-function w_vy(vy) {
-	this.vy = vy;
+function w_vx(obj, vx) {
+	obj.vx = vx;
+}
+
+function w_vy(obj, vy) {
+	obj.vy = vy;
 }
 
 function w_default() {}
 
 // GameObject wrapper for proxy
-GO_HANDLER = {
+const GO_HANDLER = {
 	spritename: w_spritename,
 	x: w_x,
 	y: w_y,
@@ -52,7 +52,7 @@ GO_HANDLER = {
 	limit: w_limit,
 };
 
-MGO_HANDLER = {
+const MO_HANDLER = {
 	spritename: w_spritename,
 	x: w_x,
 	y: w_y,
