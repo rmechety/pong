@@ -23,6 +23,7 @@ app.stage.interactive = true;
 app.stage.on("pointermove", getMousepos);
 
 mousepos = { x: 0, y: 0 };
+
 function getMousepos(e) {
 	let pos = e.data.global;
 	mousepos.x = pos.x;
