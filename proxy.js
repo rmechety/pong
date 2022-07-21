@@ -1,7 +1,7 @@
 const GameObjectProxyWrapper = {
 	set(obj, prop, value) {
 		if (prop in obj) {
-			GO_HANDLER[prop](obj, value);
+			GO_WRAPPER[prop](obj, value);
 		} else {
 			throw new Error("Property " + prop + " does not exist.");
 		}
@@ -10,7 +10,7 @@ const GameObjectProxyWrapper = {
 const MovingObjectProxyWrapper = {
 	set(obj, prop, value) {
 		if (prop in obj) {
-			MO_HANDLER[prop](obj, value);
+			MO_WRAPPER[prop](obj, value);
 		} else {
 			throw new Error("Property " + prop + " does not exist.");
 		}

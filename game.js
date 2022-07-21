@@ -1,8 +1,8 @@
-function init_player(n) {
+function init_player(n, spritename) {
 	let pos = { x: n == 0 ? WIDTH / 100 : WIDTH - (WIDTH / 100) * 10, y: HEIGHT / 2 };
 
 	let player = Object_handler("MovingObject", {
-		spritename: "stick.png",
+		spritename: spritename,
 		x: pos.x,
 		y: pos.y,
 		width: WIDTH / 10,
@@ -10,32 +10,40 @@ function init_player(n) {
 		isvisible: true,
 		iscollidable: true,
 		uplimit: 0,
-		downlimit: HEIGHT - 50,
+		downlimit: HEIGHT - HEIGHT / 5,
 		vx: 0,
 		vy: 5,
 	});
+
 	player.display();
+
 	return player;
 }
 
-let app = new PIXI.Application({ width: 640, height: 360 });
-document.body.appendChild(app.view);
-const HEIGHT = app.view.height;
-const WIDTH = app.view.width;
-
-app.stage.interactive = true;
-app.stage.on("pointermove", getMousepos);
-
-var mousepos = { x: 0, y: 0 };
 function getMousepos(e) {
 	let pos = e.data.global;
 	mousepos.x = pos.x;
 	mousepos.y = pos.y;
-	// movePos();
+	movePos(player2);
+	1;
 }
 
+function creategame() {
+	let app = new PIXI.Application({ width: 640, height: 360 });
+	document.body.appendChild(app.view);
+	app.stage.interactive = true;
+	app.stage.on("pointermove", getMousepos);
+	return app;
+}
+
+app = creategame();
+const HEIGHT = app.view.height;
+const WIDTH = app.view.width;
+
+var mousepos = { x: 0, y: 0 };
+
 let player = init_player(1);
-let player2 = init_player(0);
+let player2 = init_player(0, "stick.png");
 
 function update(player) {
 	player.y += player.vy;
@@ -54,7 +62,11 @@ function movePos(tomove) {
 
 	let offset = baseoffset * (mousepos.y > tomove.y ? 1 : -1);
 
-	if (tomove.y + offset > tomove.downlimit || tomove.y + offset < tomove.uplimit) return;
+	if (tomove.y + offset > tomove.limit.down || tomove.y + offset < tomove.limit.up) {
+		// debugger;
+		return;
+	}
+	// debugger;
 
 	tomove.y += offset;
 }
@@ -68,3 +80,12 @@ setInterval(
 	player,
 	player2,
 );
+
+// setTimeout(() => {
+// 	debugger;
+// }, 1000);
+
+// setInterval(() => {
+// 	// player2.spritename = player2.spritename == "default.jpg" ? "stick.png" : undefined;
+// 	// player2.isvisible = !player2.isvisible;
+// }, 1000);

@@ -1,5 +1,7 @@
 function w_spritename(obj, spritename) {
 	obj.spritename = spritename;
+	if (spritename == undefined) obj.spritename = "default.jpg";
+	obj.hide();
 	obj.sprite = PIXI.Sprite.from(obj.spritename);
 	obj.display();
 }
@@ -21,8 +23,16 @@ function w_height(obj, height) {
 }
 
 function w_isvisible(obj, isvisible) {
+	if (isvisible != obj.isvisible) {
+		if (isvisible) {
+			obj.show();
+		} else {
+			obj.hide();
+		}
+	}
 	obj.isvisible = isvisible;
 }
+
 function w_iscollidable(obj, iscollidable) {
 	obj.iscollidable = iscollidable;
 }
@@ -41,7 +51,7 @@ function w_vy(obj, vy) {
 function w_default() {}
 
 // GameObject wrapper for proxy
-const GO_HANDLER = {
+const GO_WRAPPER = {
 	spritename: w_spritename,
 	x: w_x,
 	y: w_y,
@@ -52,7 +62,7 @@ const GO_HANDLER = {
 	limit: w_limit,
 };
 
-const MO_HANDLER = {
+const MO_WRAPPER = {
 	spritename: w_spritename,
 	x: w_x,
 	y: w_y,
